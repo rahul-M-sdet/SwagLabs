@@ -1,6 +1,9 @@
 import time
 
+from select import select
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
 from pageObject.LoginPage import loginPage
 from pageObject.AddToCart import AddToCart
 from utilities.readProperties import ReadConfig
@@ -26,6 +29,7 @@ class Test_002_AddToCart:
         self.add2cart = AddToCart(self.driver)
         time.sleep(2)
         self.add2cart.product_click()
+        self.add2cart.click_filter("Price (low to high)")
         self.msg = self.driver.find_element(By.XPATH,"//div[contains(text(),'Sauce Labs Fleece Jacket')]").text
         time.sleep(2)
         if "Sauce Labs Fleece Jacket" in self.msg:
